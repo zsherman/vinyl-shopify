@@ -9,12 +9,18 @@
 
 {% endcomment %}
 
+{% comment %}
+  {{ resource.metafields.namespace.key }}
+{% endcomment %}
+{% assign background_image = product.images.last %}
+
 <div itemscope itemtype="http://schema.org/Product">
+  <div class="product-hero-background" style="background-image: url({{ background_image | img_url: 'master' }})">
+    <div class="hero-blur"></div>
+  </div>
 
   <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
   <meta itemprop="image" content="{{ product.featured_image.src | img_url: 'grande' }}">
-
-  {% include 'breadcrumb' %}
 
   <div class="grid product-single">
     <div class="grid__item large--one-half text-center">
@@ -30,18 +36,20 @@
         <ul class="product-single__thumbnails grid-uniform" id="ProductThumbs">
 
           {% for image in product.images %}
-            <li class="grid__item one-quarter">
-              <a href="{{ image.src | img_url: 'large' }}" class="product-single__thumbnail">
-                <img src="{{ image.src | img_url: 'compact' }}" alt="{{ image.alt | escape }}">
-              </a>
-            </li>
+            {% if image.position != forloop.length %}
+              <li class="grid__item one-quarter">
+                <a href="{{ image.src | img_url: 'large' }}" class="product-single__thumbnail">
+                  <img src="{{ image.src | img_url: 'compact' }}" alt="{{ image.alt | escape }}">
+                </a>
+              </li>
+            {% endif %}
           {% endfor %}
 
         </ul>
       {% endif %}
     </div>
 
-    <div class="grid__item large--one-half">
+    <div class="grid__item large--one-half product-info">
 
       <h1 itemprop="name">{{ product.title }}</h1>
 
@@ -94,18 +102,22 @@
           {% comment %}
             Optionally show the 'compare at' or original price of the product.
           {% endcomment %}
-          <span id="ProductPrice" class="h2{% if product.compare_at_price > product.price %} on-sale{% endif %}" itemprop="price">
-            {{ product.price | money }}
-          </span>
-
-          {% if product.compare_at_price > product.price %}
-            <p id="ComparePrice">
-              {{ 'products.product.compare_at' | t }} {{ product.compare_at_price_max | money }}
+          <div class="price-container">
+            {% if product.compare_at_price > product.price %}
+              <p id="ComparedPrice">
+                {{ product.compare_at_price | money }}
+              </p>
+            {% endif %}
+            <p id="ProductPrice" class="h2{% if product.compare_at_price > product.price %} on-sale{% endif %}" itemprop="price">
+              {{ product.price | money }}
             </p>
-          {% endif %}
+            {% comment %}<label for="Quantity" class="quantity-selector">{{ 'products.product.quantity' | t }}</label>{% endcomment %}
+            <input type="number" id="Quantity" name="quantity" value="1" min="1" class="quantity-selector">
+          </div>
 
-          <label for="Quantity" class="quantity-selector">{{ 'products.product.quantity' | t }}</label>
-          <input type="number" id="Quantity" name="quantity" value="1" min="1" class="quantity-selector">
+          <div class="product-description rte" itemprop="description">
+            {{ product.description }}
+          </div>
 
           <button type="submit" name="add" id="AddToCart" class="btn">
             <span id="AddToCartText">{{ 'products.product.add_to_cart' | t }}</span>
@@ -114,39 +126,35 @@
 
       </div>
 
-      <div class="product-description rte" itemprop="description">
-        {{ product.description }}
-      </div>
-
-      {% comment %}
-        If the user is on a collection product page (ie with /collections/collection-handle/products/product-handle)
-        in the URL, we can show next/previous links to other products in the collection.
-      {% endcomment %}
-      {% if collection %}
-        {% if collection.previous_product or collection.next_product %}
-          <p>
-
-          {% if collection.previous_product %}
-            {% capture prev_url %}{{ collection.previous_product}}#content{% endcapture %}
-            <span class="left">
-              {{ 'products.general.previous_product_html' | t | link_to: prev_url }}
-            </span>
-          {% endif %}
-
-          {% if collection.next_product %}
-            {% capture next_url %}{{ collection.next_product}}#content{% endcapture %}
-            <span class="right">
-              {{ 'products.general.next_product_html' | t | link_to: next_url }}
-            </span>
-          {% endif %}
-
-          </p>
-        {% endif %}
-      {% endif %}
-
     </div>
   </div>
 
+  {% comment %}
+    If the user is on a collection product page (ie with /collections/collection-handle/products/product-handle)
+    in the URL, we can show next/previous links to other products in the collection.
+  {% endcomment %}
+  {% if collection %}
+    {% if collection.previous_product or collection.next_product %}
+      <p>
+
+      {% if collection.previous_product %}
+        {% capture prev_url %}{{ collection.previous_product}}#content{% endcapture %}
+        <span class="left">
+          {{ 'products.general.previous_product_html' | t | link_to: prev_url }}
+        </span>
+      {% endif %}
+
+      {% if collection.next_product %}
+        {% capture next_url %}{{ collection.next_product}}#content{% endcapture %}
+        <span class="right">
+          {{ 'products.general.next_product_html' | t | link_to: next_url }}
+        </span>
+      {% endif %}
+
+      </p>
+    {% endif %}
+  {% endif %}
+  {% include 'breadcrumb' %}
 </div>
 
 {% comment %}
