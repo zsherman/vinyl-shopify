@@ -305,6 +305,7 @@ $proxima: 'Proxima-Nova', sans-serif;
       background-size: 100%;
       background-repeat: no-repeat;
       border-radius: 50%;
+      cursor: pointer;
     }
 
     .play-button-wrapper {
@@ -325,6 +326,8 @@ $proxima: 'Proxima-Nova', sans-serif;
     background: url('http://pressplayok.com/wp-content/uploads/2014/09/artworks-000090042515-yxcb0g-t500x5001.jpg');
     background-size: cover;
     background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
 
     .product-quote-wrapper {
       @include vertical-align;
@@ -366,7 +369,26 @@ $proxima: 'Proxima-Nova', sans-serif;
     }
   }
 
+  .top-triangle {
+    height: 0;
+    border-width: 0 0 70px 2000px;
+    border-style: solid;
+    border-color: transparent #fff #fff transparent;
+    position: absolute;
+    bottom: 0;
+  }
+
+  .bottom-triangle {
+    height: 0;
+    border-width: 0px 0px 70px 2000px;
+    border-style: solid;
+    border-color: transparent transparent transparent #fff;
+    position: absolute;
+    top: 0;
+  }
+
   // Tracks styles
+
   .syllabus {
     border-bottom: 1px solid #E2E2E2;
     padding: 40px;
@@ -501,14 +523,14 @@ $proxima: 'Proxima-Nova', sans-serif;
 
 // Keyframes
 
-.vinyl-image{
+.vinyl-image {
     -webkit-transition-property: -webkit-transform;
     -webkit-transition-duration: 1s;
 
     -moz-transition-property: -moz-transform;
     -moz-transition-duration: 1s;
 }
-.vinyl-image:hover {
+.vinyl-image-playing {
     -webkit-animation-name: rotate;
     -webkit-animation-duration: 3s;
     -webkit-animation-iteration-count: infinite;

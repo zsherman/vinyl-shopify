@@ -1,0 +1,9 @@
+$(function() {
+    $('.vinyl-image').on('click', function(e) {
+      if($(this).hasClass('vinyl-image-playing')) {
+        $(this).removeClass('vinyl-image-playing');
+      } else {
+        $(this).addClass('vinyl-image-playing');
+      }
+    });
+});
