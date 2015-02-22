@@ -65,6 +65,10 @@
 
   {% include 'header' %}
 
+  {% block 'hero' %}
+    Hero
+  {% endblock %}
+
   <main class="wrapper main-content" role="main">
 
     {{ content_for_layout }}
