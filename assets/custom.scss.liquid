@@ -4,6 +4,47 @@
 
 $colorHeaderBg: {{ settings.color_header_bg }};
 // $backgroundUrl: {{product.images.last | img_url: "large"}}
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700|Raleway:400,300,600,500|Merriweather:400,300);
+$open-sans: "Open Sans", sans-serif;
+$merriweather: 'Merriweather', serif;
+$lato: 'Lato', sans-serif;
+$raleway: 'Raleway', sans-serif;
+$brandon: 'Brandon-Grotesque', sans-serif;
+$proxima: 'Proxima-Nova', sans-serif;
+
+@mixin vertical-align {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.zig-zag {
+  position: relative;
+  width: 200px;
+  height: 0px;
+  margin-top: 5px;
+  padding: 5px;
+  background: #fff;
+}
+
+.zig-zag:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -10px;
+  width: 100%;
+  height: 10px;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 75%, #9AA4B1 75%, #9AA4B1), linear-gradient(225deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 75%, #9AA4B1 75%, #b6b5eb), linear-gradient(45deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 75%, #9AA4B1 75%, #9AA4B1), linear-gradient(315deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 75%, #9AA4B1 75%, #9AA4B1);
+  background-position: 0.5em 0.5em, 0.5em 0.5em, 0 0.5em, 0 0.5em;
+  background-size: 1em 1em;
+  left: -50px;
+  top: -1em;
+  height: 1em;
+  width: 100%;
+  transform: scale(.5);
+}
 
 .site-header__logo img {
   height: 45px;
@@ -69,6 +110,10 @@ $colorHeaderBg: {{ settings.color_header_bg }};
 
 .template-product {
 
+  .grid {
+    margin-left: 0;
+  }
+
   .product-hero-background {
     position: absolute;
     height: 540px;
@@ -100,9 +145,9 @@ $colorHeaderBg: {{ settings.color_header_bg }};
 
   .product-single__thumbnails {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100px;
+    top: 80px;
+    left: 50px;
+    width: 90px;
 
     li {
       width: 100%;
@@ -200,4 +245,108 @@ $colorHeaderBg: {{ settings.color_header_bg }};
   nav.breadcrumb {
     text-align: center;
   }
+
+  // Below the fold
+
+  // About this record
+
+  .about-this-box {
+    padding: 30px;
+  }
+
+  .about-this-box-description {
+    padding: 30px 30px 30px 40px;
+
+    h2 {
+      font-family: $lato;
+      font-size: 32px;
+      color: #324141;
+      line-height: 42px;
+      letter-spacing: 1px;
+      font-family: ProximaNova-Bold;
+    }
+
+    .sub-header {
+      font-family: $lato;
+      font-size: 16px;
+      color: #9FAEAE;
+      line-height: 27px;
+    }
+
+    blockquote {
+      font-family: Adelle-Italic;
+      font-size: 15px;
+      color: #959595;
+      line-height: 26px;
+      letter-spacing: 0px;
+    }
+
+    p.description {
+      font-family: Adelle-Light;
+      font-size: 15px;
+      color: #454545;
+      line-height: 26px;
+      letter-spacing: 0px;
+    }
+  }
+
+  .about-this-box-image {
+    padding: 60px 30px;
+
+    .vinyl-image {
+      height: 470px;
+      width: 470px;
+      background: url('http://cdn.shopify.com/s/files/1/0570/2697/products/10f6ce8a62c3043ac72196a2bbb86ac265f39265_large.jpeg?v=1424561305');
+      background-size: 100%;
+      background-repeat: no-repeat;
+      border-radius: 50%;
+    }
+
+    .play-button-wrapper {
+      @include vertical-align;
+      text-align: center;
+
+      img {
+        height: 100px;
+        width: 100px;
+      }
+    }
+  }
+
+
+
+
+}
+
+
+
+// Keyframes
+
+.vinyl-image{
+    -webkit-transition-property: -webkit-transform;
+    -webkit-transition-duration: 1s;
+
+    -moz-transition-property: -moz-transform;
+    -moz-transition-duration: 1s;
+}
+.vinyl-image:hover {
+    -webkit-animation-name: rotate;
+    -webkit-animation-duration: 3s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+
+    -moz-animation-name: rotate;
+    -moz-animation-duration: 3s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+}
+
+@-webkit-keyframes rotate {
+    from {-webkit-transform: rotate(0deg);}
+    to {-webkit-transform: rotate(360deg);}
+}
+
+@-moz-keyframes rotate {
+    from {-moz-transform: rotate(0deg);}
+    to {-moz-transform: rotate(360deg);}
 }
