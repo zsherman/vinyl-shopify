@@ -117,7 +117,7 @@
             </div>
 
             <div class="product-description rte" itemprop="description">
-              {{ product.metafields.hero.description }}
+              {{ product.description }}
             </div>
 
             <button type="submit" name="add" id="AddToCart" class="btn">
@@ -140,16 +140,16 @@
     <div class="about-this-box grid">
       <div class="grid__item large--one-half about-this-box-description">
         <div class="zig-zag"></div>
-        <h2>More About This Record</h2>
-        <p class="sub-header">You will become a master of matcha in no time with this interactive kit from Japan.</p>
+        <h2>{{ product.metafields.about.header }}</h2>
+        <p class="sub-header">{{ product.metafields.about.subtext }}</p>
         <p class="description">
-          Coffee takes specific knowledge to do correctly. From water control, to fixing bitterness or sourness, to blooming your grinds, and much more. Let expert barista, Josh Littlefield, teach you everything you need to know. Videos included with the box.
+          {{ product.metafields.about.block_1 }}
         </p>
         <blockquote>
-          Coffee takes specific knowledge to do correctly. From water control, to fixing bitterness or sourness, to blooming your grinds, and much more.
+          {{ product.metafields.about.block_2 }}
         </blockquote>
         <p class="description">
-          Coffee takes specific knowledge to do correctly. From water control, to fixing bitterness or sourness, to blooming your grinds, and much more. Let expert barista, Josh Littlefield, teach you everything you need to know. Videos included with the box.
+          {{ product.metafields.about.block_3 }}
         </p>
       </div>
       <div class="grid__item large--one-half about-this-box-image">
@@ -163,7 +163,7 @@
   </div>
 
   <!-- Large Image -->
-  <div class="large-product-image" style="">
+  <div class="large-product-image" style="background-image: url('{{ product.metafields.large-image.image_url }}')">
     <div class="bottom-triangle"></div>
     <div class="product-quote-wrapper">
       <div class="product-quote">
@@ -178,55 +178,21 @@
   <div class="wrapper">
     <div class="grid syllabus">
       <div class="grid__item large--one-half columns syllabus-description">
-        <h2>Enjoy The Music</h2>
-          <p class="sub-header">You will become a master of matcha in no time with this interactive kit from Japan.</p>
+        <div class="zig-zag"></div>
+        <h2>{{ product.metafields.tracks.header }}</h2>
+          <p class="sub-header">{{ product.metafields.tracks.subtext }}</p>
           <p class="description">
-            <em>Tea is an art.</em> Coffee takes specific knowledge to do correctly. From water control, to fixing bitterness or sourness, to blooming your grinds, and much more. Let expert barista, Josh Littlefield, teach you everything you need to know. Videos included with the box.
+            {{ product.metafields.tracks.block_1 }}
           </p>
           <p class="description">
-            <em>It's also a science.</em> Coffee takes specific knowledge to do correctly. From water control, to fixing bitterness or sourness, to blooming your grinds, and much more. Let expert barista, Josh Littlefield, teach you everything you need to know. Videos included with the box.
+            {{ product.metafields.tracks.block_2 }}
           </p>
           <p class="description">
-            <em>You must train your taste buds.</em> Coffee takes specific knowledge to do correctly. From water control, to fixing bitterness or sourness, to blooming your grinds, and much more. Let expert barista, Josh Littlefield, teach you everything you need to know. Videos included with the box.
+            {{ product.metafields.tracks.block_3 }}
           </p>
         </div>
       <div class="grid__item large--one-half syllabus-lessons">
-        <ul>
-          <li>
-            <div class="play-button"><i class="icon icon-youtube"></i></div>
-            What is matcha?
-            <span>Preview</span>
-          </li>
-          <li>
-            <div class="play-button"><i class="icon icon-youtube"></i></div>
-            Brewing Tools
-            <span>Preview</span>
-          </li>
-          <li>
-            <div class="play-button"><i class="icon icon-youtube"></i></div>
-            Your Ingredients
-          </li>
-          <li>
-            <div class="play-button"><i class="icon icon-youtube"></i></div>
-            Brewing techniques
-          </li>
-          <li>
-            <div class="play-button"><i class="icon icon-youtube"></i></div>
-            Getting the ratio right
-          </li>
-          <li>
-            <div class="play-button"><i class="icon icon-youtube"></i></div>
-            Tasting your tea
-          </li>
-          <li>
-            <div class="play-button"><i class="icon icon-youtube"></i></div>
-            Adjusting your brew
-          </li>
-          <li>
-            <div class="play-button"><i class="icon icon-youtube"></i></div>
-            What is matcha?
-          </li>
-        </ul>
+        {{ product.metafields.tracks.track_list }}
       </div>
     </div>
   </div>
@@ -237,23 +203,23 @@
       <h1>The best things come in thin square packages.</h1>
         <div class="ingredient grid__item large--one-half columns">
           <img src="{{ featured_image | img_url: 'small' }}" />
-          <h3>Traditional Chawan</h3>
-          <p>It's exactly what you need to brew the perfect matcha, a tradtion that goes back over a thousand years and spans dynasties.</p>
+          <h3>{{ product.metafields.product_contents.item_1 }}</h3>
+          <p>{{ product.metafields.product_contents.item_1_description }}</p>
         </div>
         <div class="ingredient grid__item large--one-half columns">
-          <img src="{{ featured_image | img_url: 'small' }}" />
-          <h3>Traditional Chawan</h3>
-          <p>It's exactly what you need to brew the perfect matcha, a tradtion that goes back over a thousand years and spans dynasties.</p>
+          <img src="{{ product.metafields.product_contents.item_2_image }}" />
+          <h3>{{ product.metafields.product_contents.item_2 }}</h3>
+          <p>{{ product.metafields.product_contents.item_2_description }}</p>
         </div>
         <div class="ingredient grid__item large--one-half columns">
-          <img src="{{ featured_image | img_url: 'small' }}" />
-          <h3>Traditional Chawan</h3>
-          <p>It's exactly what you need to brew the perfect matcha, a tradtion that goes back over a thousand years and spans dynasties.</p>
+          <img src="{{ product.metafields.product_contents.item_3_image }}" />
+          <h3>{{ product.metafields.product_contents.item_3 }}</h3>
+          <p>{{ product.metafields.product_contents.item_3_description }}</p>
         </div>
         <div class="ingredient grid__item large--one-half columns">
-          <img src="{{ featured_image | img_url: 'small' }}" />
-          <h3>Traditional Chawan</h3>
-          <p>It's exactly what you need to brew the perfect matcha, a tradtion that goes back over a thousand years and spans dynasties.</p>
+          <img src="{{ product.metafields.product_contents.item_4_image }}" />
+          <h3>{{ product.metafields.product_contents.item_4 }}</h3>
+          <p>{{ product.metafields.product_contents.item_4_description }}</p>
         </div>
     </div>
   </div>
@@ -287,6 +253,14 @@
     {% endif %}
     {% include 'breadcrumb' %}
   </div>
+
+  <div class="soundcloud-widget">
+    {{ product.metafields.soundcloud.widget }}
+  </div>
+
+  {% comment %}Reviews{% endcomment %}
+  {% comment %}<div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
+  <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>{% endcomment %}
 
 </div>
 
