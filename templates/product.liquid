@@ -41,91 +41,93 @@
     </ul>
   {% endif %}
 
-  <div class="grid product-single">
-    <div class="grid__item large--one-half text-center">
-      <div class="product-single__photos" id="ProductPhoto">
-        {% assign featured_image = product.selected_or_first_available_variant.featured_image | default: product.featured_image %}
-        <img src="{{ featured_image | img_url: 'large' }}" alt="{{ featured_image.alt | escape }}" id="ProductPhotoImg">
+  <div class="wrapper">
+    <div class="grid product-single">
+      <div class="grid__item large--one-half text-center">
+        <div class="product-single__photos" id="ProductPhoto">
+          {% assign featured_image = product.selected_or_first_available_variant.featured_image | default: product.featured_image %}
+          <img src="{{ featured_image | img_url: 'large' }}" alt="{{ featured_image.alt | escape }}" id="ProductPhotoImg">
+        </div>
       </div>
-    </div>
 
-    <div class="grid__item large--one-half product-info">
+      <div class="grid__item large--one-half product-info">
 
-      <h1 itemprop="name">{{ product.title }}</h1>
+        <h1 itemprop="name">{{ product.title }}</h1>
 
-      <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-
-        {% comment %}
-          Get first variant, or deep linked one
-        {% endcomment %}
-        {% assign variant = product.selected_or_first_available_variant %}
-
-        <meta itemprop="priceCurrency" content="{{ shop.currency }}">
-
-        <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
-
-        {% comment %}
-          ID addToCartForm is a selector for the ajaxify cart plugin
-        {% endcomment %}
-        <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm">
+        <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 
           {% comment %}
-            Add product variants as a dropdown.
-              - By default, each variant (or combination of variants) will display as its own <option>
-              - To separate these into multiple steps, which we suggest, use option_selection.js (see below)
-
-            You can leverage jQuery to add a callback on page load and each time the select element changes:
-              - Include option_selection.js (as seen at the bottom of this file)
-              - This allows you to use JavaScript anytime the variant dropdown changes
-              - This also separates out your variant options (ie. size, color, etc.) to separate select elements
-
-            For more information on products with multiple options, visit:
-              - http://docs.shopify.com/support/your-website/themes/can-i-make-my-theme-use-products-with-multiple-options#update-product-liquid
+            Get first variant, or deep linked one
           {% endcomment %}
-          <select name="id" id="productSelect" class="product-single__variants">
-            {% for variant in product.variants %}
-              {% if variant.available %}
+          {% assign variant = product.selected_or_first_available_variant %}
 
-                {% comment %}
-                  Note: if you use option_selection.js, your <select> tag will be overwritten, meaning what you have inside <option> will not reflect what you coded below.
-                {% endcomment %}
-                <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}</option>
+          <meta itemprop="priceCurrency" content="{{ shop.currency }}">
 
-              {% else %}
-                <option disabled="disabled">
-                  {{ variant.title }} - {{ 'products.product.sold_out' | t }}
-                </option>
+          <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
+
+          {% comment %}
+            ID addToCartForm is a selector for the ajaxify cart plugin
+          {% endcomment %}
+          <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm">
+
+            {% comment %}
+              Add product variants as a dropdown.
+                - By default, each variant (or combination of variants) will display as its own <option>
+                - To separate these into multiple steps, which we suggest, use option_selection.js (see below)
+
+              You can leverage jQuery to add a callback on page load and each time the select element changes:
+                - Include option_selection.js (as seen at the bottom of this file)
+                - This allows you to use JavaScript anytime the variant dropdown changes
+                - This also separates out your variant options (ie. size, color, etc.) to separate select elements
+
+              For more information on products with multiple options, visit:
+                - http://docs.shopify.com/support/your-website/themes/can-i-make-my-theme-use-products-with-multiple-options#update-product-liquid
+            {% endcomment %}
+            <select name="id" id="productSelect" class="product-single__variants">
+              {% for variant in product.variants %}
+                {% if variant.available %}
+
+                  {% comment %}
+                    Note: if you use option_selection.js, your <select> tag will be overwritten, meaning what you have inside <option> will not reflect what you coded below.
+                  {% endcomment %}
+                  <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}</option>
+
+                {% else %}
+                  <option disabled="disabled">
+                    {{ variant.title }} - {{ 'products.product.sold_out' | t }}
+                  </option>
+                {% endif %}
+              {% endfor %}
+            </select>
+
+            {% comment %}
+              Optionally show the 'compare at' or original price of the product.
+            {% endcomment %}
+            <div class="price-container">
+              {% if product.compare_at_price > product.price %}
+                <p id="ComparedPrice">
+                  {{ product.compare_at_price | money }}
+                </p>
               {% endif %}
-            {% endfor %}
-          </select>
-
-          {% comment %}
-            Optionally show the 'compare at' or original price of the product.
-          {% endcomment %}
-          <div class="price-container">
-            {% if product.compare_at_price > product.price %}
-              <p id="ComparedPrice">
-                {{ product.compare_at_price | money }}
+              <p id="ProductPrice" class="h2{% if product.compare_at_price > product.price %} on-sale{% endif %}" itemprop="price">
+                {{ product.price | money }}
               </p>
-            {% endif %}
-            <p id="ProductPrice" class="h2{% if product.compare_at_price > product.price %} on-sale{% endif %}" itemprop="price">
-              {{ product.price | money }}
-            </p>
-            {% comment %}<label for="Quantity" class="quantity-selector">{{ 'products.product.quantity' | t }}</label>{% endcomment %}
-            <input type="number" id="Quantity" name="quantity" value="1" min="1" class="quantity-selector">
-          </div>
+              {% comment %}<label for="Quantity" class="quantity-selector">{{ 'products.product.quantity' | t }}</label>{% endcomment %}
+              <input type="number" id="Quantity" name="quantity" value="1" min="1" class="quantity-selector">
+            </div>
 
-          <div class="product-description rte" itemprop="description">
-            {{ product.metafields.hero.description }}
-          </div>
+            <div class="product-description rte" itemprop="description">
+              {{ product.metafields.hero.description }}
+            </div>
 
-          <button type="submit" name="add" id="AddToCart" class="btn">
-            <span id="AddToCartText">{{ 'products.product.add_to_cart' | t }}</span>
-          </button>
-        </form>
+            <button type="submit" name="add" id="AddToCart" class="btn">
+              <span id="AddToCartText">{{ 'products.product.add_to_cart' | t }}</span>
+            </button>
+          </form>
+
+        </div>
 
       </div>
-
     </div>
   </div>
 
@@ -134,142 +136,155 @@
   </div>{% endcomment %}
 
   <!-- About This Box -->
-  <div class="about-this-box grid">
-    <div class="grid__item large--one-half about-this-box-description">
-      <div class="zig-zag"></div>
-      <h2>More About This Record</h2>
-      <p class="sub-header">You will become a master of matcha in no time with this interactive kit from Japan.</p>
-      <p class="description">
-        Coffee takes specific knowledge to do correctly. From water control, to fixing bitterness or sourness, to blooming your grinds, and much more. Let expert barista, Josh Littlefield, teach you everything you need to know. Videos included with the box.
-      </p>
-      <blockquote>
-        Coffee takes specific knowledge to do correctly. From water control, to fixing bitterness or sourness, to blooming your grinds, and much more.
-      </blockquote>
-      <p class="description">
-        Coffee takes specific knowledge to do correctly. From water control, to fixing bitterness or sourness, to blooming your grinds, and much more. Let expert barista, Josh Littlefield, teach you everything you need to know. Videos included with the box.
-      </p>
-    </div>
-    <div class="grid__item large--one-half about-this-box-image">
-      <div class="vinyl-image" background-image="{{ featured_image | img_url: 'large' }}">
-        <div class="play-button-wrapper">
-          <img src="{{ 'play-button.png' | asset_url }}" />
+  <div class="wrapper">
+    <div class="about-this-box grid">
+      <div class="grid__item large--one-half about-this-box-description">
+        <div class="zig-zag"></div>
+        <h2>More About This Record</h2>
+        <p class="sub-header">You will become a master of matcha in no time with this interactive kit from Japan.</p>
+        <p class="description">
+          Coffee takes specific knowledge to do correctly. From water control, to fixing bitterness or sourness, to blooming your grinds, and much more. Let expert barista, Josh Littlefield, teach you everything you need to know. Videos included with the box.
+        </p>
+        <blockquote>
+          Coffee takes specific knowledge to do correctly. From water control, to fixing bitterness or sourness, to blooming your grinds, and much more.
+        </blockquote>
+        <p class="description">
+          Coffee takes specific knowledge to do correctly. From water control, to fixing bitterness or sourness, to blooming your grinds, and much more. Let expert barista, Josh Littlefield, teach you everything you need to know. Videos included with the box.
+        </p>
+      </div>
+      <div class="grid__item large--one-half about-this-box-image">
+        <div class="vinyl-image" background-image="{{ featured_image | img_url: 'large' }}">
+          <div class="play-button-wrapper">
+            <img src="{{ 'play-button.png' | asset_url }}" />
+          </div>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Large Image -->
-  <div class="large-product-image" style="background-image: url('https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRG4RIeXB08rJQd9XMbKFRghL-dMTwUf0oCd9IJjpUho65q9imSiA')">
-
+  <div class="large-product-image" style="">
+    <div class="product-quote-wrapper">
+      <div class="product-quote">
+        <h2>Absolutely Breathtaking</h2>
+        <p>I was playing the guitar and Thom was responding to what I was doing on Ableton and before we knew it, we'd come up with this really interesting structure, and I came up with lyrics for it quite quickly." Gus Unger-Hamilton said "it sounded cool.</p>
+      </div>
+    </div>
   </div>
 
   <!-- Syllabus -->
-  <div class="grid syllabus">
-    <div class="grid__item large--one-half columns syllabus-description">
-      <h2>Enjoy The Music</h2>
-        <p class="sub-header">You will become a master of matcha in no time with this interactive kit from Japan.</p>
-        <p class="description">
-          <em>Tea is an art.</em> Coffee takes specific knowledge to do correctly. From water control, to fixing bitterness or sourness, to blooming your grinds, and much more. Let expert barista, Josh Littlefield, teach you everything you need to know. Videos included with the box.
-        </p>
-        <p class="description">
-          <em>It's also a science.</em> Coffee takes specific knowledge to do correctly. From water control, to fixing bitterness or sourness, to blooming your grinds, and much more. Let expert barista, Josh Littlefield, teach you everything you need to know. Videos included with the box.
-        </p>
-        <p class="description">
-          <em>You must train your taste buds.</em> Coffee takes specific knowledge to do correctly. From water control, to fixing bitterness or sourness, to blooming your grinds, and much more. Let expert barista, Josh Littlefield, teach you everything you need to know. Videos included with the box.
-        </p>
+  <div class="wrapper">
+    <div class="grid syllabus">
+      <div class="grid__item large--one-half columns syllabus-description">
+        <h2>Enjoy The Music</h2>
+          <p class="sub-header">You will become a master of matcha in no time with this interactive kit from Japan.</p>
+          <p class="description">
+            <em>Tea is an art.</em> Coffee takes specific knowledge to do correctly. From water control, to fixing bitterness or sourness, to blooming your grinds, and much more. Let expert barista, Josh Littlefield, teach you everything you need to know. Videos included with the box.
+          </p>
+          <p class="description">
+            <em>It's also a science.</em> Coffee takes specific knowledge to do correctly. From water control, to fixing bitterness or sourness, to blooming your grinds, and much more. Let expert barista, Josh Littlefield, teach you everything you need to know. Videos included with the box.
+          </p>
+          <p class="description">
+            <em>You must train your taste buds.</em> Coffee takes specific knowledge to do correctly. From water control, to fixing bitterness or sourness, to blooming your grinds, and much more. Let expert barista, Josh Littlefield, teach you everything you need to know. Videos included with the box.
+          </p>
+        </div>
+      <div class="grid__item large--one-half syllabus-lessons">
+        <ul>
+          <li>
+            <div class="play-button"><i class="icon icon-youtube"></i></div>
+            What is matcha?
+            <span>Preview</span>
+          </li>
+          <li>
+            <div class="play-button"><i class="icon icon-youtube"></i></div>
+            Brewing Tools
+            <span>Preview</span>
+          </li>
+          <li>
+            <div class="play-button"><i class="icon icon-youtube"></i></div>
+            Your Ingredients
+          </li>
+          <li>
+            <div class="play-button"><i class="icon icon-youtube"></i></div>
+            Brewing techniques
+          </li>
+          <li>
+            <div class="play-button"><i class="icon icon-youtube"></i></div>
+            Getting the ratio right
+          </li>
+          <li>
+            <div class="play-button"><i class="icon icon-youtube"></i></div>
+            Tasting your tea
+          </li>
+          <li>
+            <div class="play-button"><i class="icon icon-youtube"></i></div>
+            Adjusting your brew
+          </li>
+          <li>
+            <div class="play-button"><i class="icon icon-youtube"></i></div>
+            What is matcha?
+          </li>
+        </ul>
       </div>
-    <div class="grid__item large--one-half syllabus-lessons">
-      <ul>
-        <li>
-          <div class="play-button"><i class="icon icon-youtube"></i></div>
-          What is matcha?
-          <span>Preview</span>
-        </li>
-        <li>
-          <div class="play-button"><i class="icon icon-youtube"></i></div>
-          Brewing Tools
-          <span>Preview</span>
-        </li>
-        <li>
-          <div class="play-button"><i class="icon icon-youtube"></i></div>
-          Your Ingredients
-        </li>
-        <li>
-          <div class="play-button"><i class="icon icon-youtube"></i></div>
-          Brewing techniques
-        </li>
-        <li>
-          <div class="play-button"><i class="icon icon-youtube"></i></div>
-          Getting the ratio right
-        </li>
-        <li>
-          <div class="play-button"><i class="icon icon-youtube"></i></div>
-          Tasting your tea
-        </li>
-        <li>
-          <div class="play-button"><i class="icon icon-youtube"></i></div>
-          Adjusting your brew
-        </li>
-        <li>
-          <div class="play-button"><i class="icon icon-youtube"></i></div>
-          What is matcha?
-        </li>
-      </ul>
     </div>
   </div>
 
   <!-- Ingredients -->
-  <div class="grid ingredients">
-    <h1>The best things come in thin square packages.</h1>
-      <div class="ingredient grid__item large--one-half columns">
-        <img src="{{ featured_image | img_url: 'small' }}" />
-        <h3>Traditional Chawan</h3>
-        <p>It's exactly what you need to brew the perfect matcha, a tradtion that goes back over a thousand years and spans dynasties.</p>
-      </div>
-      <div class="ingredient grid__item large--one-half columns">
-        <img src="{{ featured_image | img_url: 'small' }}" />
-        <h3>Traditional Chawan</h3>
-        <p>It's exactly what you need to brew the perfect matcha, a tradtion that goes back over a thousand years and spans dynasties.</p>
-      </div>
-      <div class="ingredient grid__item large--one-half columns">
-        <img src="{{ featured_image | img_url: 'small' }}" />
-        <h3>Traditional Chawan</h3>
-        <p>It's exactly what you need to brew the perfect matcha, a tradtion that goes back over a thousand years and spans dynasties.</p>
-      </div>
-      <div class="ingredient grid__item large--one-half columns">
-        <img src="{{ featured_image | img_url: 'small' }}" />
-        <h3>Traditional Chawan</h3>
-        <p>It's exactly what you need to brew the perfect matcha, a tradtion that goes back over a thousand years and spans dynasties.</p>
-      </div>
+  <div class="wrapper">
+    <div class="grid ingredients">
+      <h1>The best things come in thin square packages.</h1>
+        <div class="ingredient grid__item large--one-half columns">
+          <img src="{{ featured_image | img_url: 'small' }}" />
+          <h3>Traditional Chawan</h3>
+          <p>It's exactly what you need to brew the perfect matcha, a tradtion that goes back over a thousand years and spans dynasties.</p>
+        </div>
+        <div class="ingredient grid__item large--one-half columns">
+          <img src="{{ featured_image | img_url: 'small' }}" />
+          <h3>Traditional Chawan</h3>
+          <p>It's exactly what you need to brew the perfect matcha, a tradtion that goes back over a thousand years and spans dynasties.</p>
+        </div>
+        <div class="ingredient grid__item large--one-half columns">
+          <img src="{{ featured_image | img_url: 'small' }}" />
+          <h3>Traditional Chawan</h3>
+          <p>It's exactly what you need to brew the perfect matcha, a tradtion that goes back over a thousand years and spans dynasties.</p>
+        </div>
+        <div class="ingredient grid__item large--one-half columns">
+          <img src="{{ featured_image | img_url: 'small' }}" />
+          <h3>Traditional Chawan</h3>
+          <p>It's exactly what you need to brew the perfect matcha, a tradtion that goes back over a thousand years and spans dynasties.</p>
+        </div>
+    </div>
   </div>
 
 
-  {% comment %}
-    If the user is on a collection product page (ie with /collections/collection-handle/products/product-handle)
-    in the URL, we can show next/previous links to other products in the collection.
-  {% endcomment %}
-  {% if collection %}
-    {% if collection.previous_product or collection.next_product %}
-      <p>
+  <div class="wrapper">
+    {% comment %}
+      If the user is on a collection product page (ie with /collections/collection-handle/products/product-handle)
+      in the URL, we can show next/previous links to other products in the collection.
+    {% endcomment %}
+    {% if collection %}
+      {% if collection.previous_product or collection.next_product %}
+        <p>
 
-      {% if collection.previous_product %}
-        {% capture prev_url %}{{ collection.previous_product}}#content{% endcapture %}
-        <span class="left">
-          {{ 'products.general.previous_product_html' | t | link_to: prev_url }}
-        </span>
+        {% if collection.previous_product %}
+          {% capture prev_url %}{{ collection.previous_product}}#content{% endcapture %}
+          <span class="left">
+            {{ 'products.general.previous_product_html' | t | link_to: prev_url }}
+          </span>
+        {% endif %}
+
+        {% if collection.next_product %}
+          {% capture next_url %}{{ collection.next_product}}#content{% endcapture %}
+          <span class="right">
+            {{ 'products.general.next_product_html' | t | link_to: next_url }}
+          </span>
+        {% endif %}
+
+        </p>
       {% endif %}
-
-      {% if collection.next_product %}
-        {% capture next_url %}{{ collection.next_product}}#content{% endcapture %}
-        <span class="right">
-          {{ 'products.general.next_product_html' | t | link_to: next_url }}
-        </span>
-      {% endif %}
-
-      </p>
     {% endif %}
-  {% endif %}
-  {% include 'breadcrumb' %}
+    {% include 'breadcrumb' %}
+  </div>
 </div>
 
 {% comment %}

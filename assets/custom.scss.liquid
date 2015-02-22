@@ -46,13 +46,18 @@ $proxima: 'Proxima-Nova', sans-serif;
   transform: scale(.5);
 }
 
+.btn, input[type="submit"] {
+  background: #000;
+  color: #fff;
+}
+
 .site-header__logo img {
   height: 45px;
   width: 45px;
 }
 
 .site-header {
-  height: 62px;
+  height: 63px;
 }
 
 .nav-bar {
@@ -98,7 +103,7 @@ $proxima: 'Proxima-Nova', sans-serif;
 }
 
 .site-header {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #eee;
   padding: 0px;
 }
 
@@ -317,9 +322,48 @@ $proxima: 'Proxima-Nova', sans-serif;
 
   .large-product-image {
     height: 500px;
-    background: image-url('product/large-set.png');
+    background: url('http://pressplayok.com/wp-content/uploads/2014/09/artworks-000090042515-yxcb0g-t500x5001.jpg');
     background-size: cover;
     background-repeat: no-repeat;
+
+    .product-quote-wrapper {
+      @include vertical-align;
+    }
+
+    .product-quote {
+      width: 500px;
+      margin: 0 auto;
+      background: #fff;
+      text-align: center;
+      padding: 30px;
+    }
+
+    .product-quote h2 {
+      font-family: ProximaNova-Light;
+      font-size: 24px;
+      font-weight: 400;
+      // text-transform: uppercase;
+      letter-spacing: .5px;
+      color: #000000;
+      line-height: 27px;
+      padding: 10px;
+    }
+
+    .product-quote h2:after {
+      content: '';
+      border-bottom: 3px solid #000;
+      display: block;
+      width: 90px;
+      margin: 0 auto;
+      padding: 10px;
+    }
+
+    .product-quote p {
+      font-family: ProximaNova-Regular;
+      font-size: 14px;
+      color: #252525;
+      padding: 10px 0 0 0;
+    }
   }
 
   // Tracks styles
