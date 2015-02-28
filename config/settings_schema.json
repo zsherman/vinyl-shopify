@@ -139,6 +139,42 @@
     ]
   },
   {
+    "name": "Homepage",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Images"
+      },
+      {
+        "type": "image",
+        "id": "hero_image.png",
+        "label": "Custom Hero",
+        "info": "This is the image that will show in the background of the homepage in the hero section."
+      },
+      {
+        "type": "text",
+        "id": "hero_top_line",
+        "label": "Hero top line",
+        "default": "We fucking love vinyl.",
+        "info": "Top line in the hero section of the homepage."
+      },
+      {
+        "type": "text",
+        "id": "hero_middle_line",
+        "label": "Hero Middle Line",
+        "default": "Vinyl Records.",
+        "info": "Middle line in the hero section of the homepage."
+      },
+      {
+        "type": "text",
+        "id": "hero_bottom_line",
+        "label": "Hero Bottom Line",
+        "default": "Get kickass deals on hot new releases.",
+        "info": "Bottom line in the hero section of the homepage."
+      }
+    ]
+  },
+  {
     "name": "Footer",
     "settings": [
       {

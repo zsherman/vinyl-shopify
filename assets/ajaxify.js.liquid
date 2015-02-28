@@ -596,7 +596,7 @@ var ajaxifyShopify = (function(module, $) {
 
   hideDrawer = function () {
     $drawerContainer.removeAttr('style').removeClass('is-visible');
-    $('.template-product .product-hero-background').removeClass('is-visible').css('top', '62px');
+    //$('.template-product .product-hero-background').removeClass('is-visible').css('top', '62px');
     scrollTop();
     toggleCallback({
       'is_visible': false
@@ -610,7 +610,7 @@ var ajaxifyShopify = (function(module, $) {
       $drawerHeight = $cartContainer.outerHeight();
       $('.cart__row img').css('width', 'auto'); // fix Chrome image size bug
       $drawerContainer.css('height',  $drawerHeight + 'px');
-      $('.template-product .product-hero-background').addClass('is-visible').css('top', $drawerHeight + 62 + 'px');
+      //$('.template-product .product-hero-background').addClass('is-visible').css('top', $drawerHeight + 62 + 'px');
     }
   };
 

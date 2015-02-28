@@ -125,6 +125,7 @@ $proxima: 'Proxima-Nova', sans-serif;
 
   .product-hero-background {
     width: 100%;
+    position: relative;
     padding-top: 30px;
     left: 0;
     right: 0;
@@ -152,7 +153,7 @@ $proxima: 'Proxima-Nova', sans-serif;
 
   .product-single__thumbnails {
     position: absolute;
-    top: 80px;
+    top: 22px;
     left: 50px;
     width: 90px;
 
@@ -552,6 +553,92 @@ $proxima: 'Proxima-Nova', sans-serif;
     -moz-animation-iteration-count: infinite;
     -moz-animation-timing-function: linear;
 }
+
+// Index styles
+
+.template-index {
+
+  main {
+    margin-top: 0;
+  }
+
+  .index-hero {
+    min-height: 550px;
+    text-align: center;
+    color: #fff;
+    position: relative;
+  }
+
+
+  .hero-content {
+    @include vertical-align;
+    position: absolute;
+    width: 100%;
+
+    h4 {
+      font-family: ProximaNova-Regular;
+      font-size: 23px;
+      color: #FFFFFF;
+      line-height: 26px;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    h1 {
+      font-family: ProximaNova-Semibold;
+      font-size: 76px;
+      color: #FFFFFF;
+      line-height: 89px;
+      letter-spacing: 9px;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    .border {
+      height: 3px;
+      background: #A68255;
+      width: 215px;
+      margin: 20px auto;
+    }
+
+    h3 {
+      font-family: ProximaNova-Regular;
+      font-size: 23px;
+      color: #FFFFFF;
+      line-height: 26px;
+      letter-spacing: .3px;
+      text-transform: uppercase;
+      font-weight: 300;
+      opacity: .8;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .view-deals {
+      padding: 20px 30px;
+      border: 2px solid #fff;
+      font-family: ProximaNova-Regular;
+      font-size: 23px;
+      color: #FFFFFF;
+      line-height: 26px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: inline-block;
+      margin: 10px 0;
+
+      &:hover {
+        background: #fff;
+        color: #000;
+      }
+    }
+  }
+
+
+
+}
+
+
 
 @-webkit-keyframes rotate {
     from {-webkit-transform: rotate(0deg);}

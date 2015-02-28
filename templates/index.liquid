@@ -7,6 +7,19 @@
     - http://docs.shopify.com/themes/liquid-variables/global
 {% endcomment %}
 
+<div class="index-hero" style="background-image: url({{ 'hero_image.png' | asset_url }})">
+  <div class="hero-content">
+    <h4>{{settings.hero_top_line}}</h4>
+    <div class="border"></div>
+    <h1>{{settings.hero_middle_line}}</h1>
+    <h3>{{settings.hero_bottom_line}}</h3>
+    <a href="#" class="view-deals
+    ">View Deals</a>
+  </div>
+</div>
+
+<div class="wrapper">
+
 <h2>{{ 'home_page.sections.frontpage_title' | t }}</h2>
 
 {% comment %}
@@ -142,4 +155,6 @@
     </div>
 
   {% endfor %}
+</div>
+
 </div>
