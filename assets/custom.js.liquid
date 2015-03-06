@@ -31,5 +31,17 @@ $(function() {
       }
     });
 
+    $('.syllabus-lessons li a').on('click', function(e) {
+      e.preventDefault();
+      $('.video-block').slideUp('500').empty();
+      // Clear old video
+      // Append new video
+      var url = $(this).data().url + '?rel=0&autoplay=1';
+      var videoBlock = $(this).closest('li').find('.video-block')
+      var embed = '<iframe width="100%" height="315" src="' + url + '" frameborder="0" allowfullscreen></iframe>';
+      videoBlock.append(embed);
+      videoBlock.slideDown('500');
+    })
+
 
 });

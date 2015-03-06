@@ -15,6 +15,7 @@
 {% assign background_image = product.images.last %}
 {% assign large_image_index = product.images.length | minus:2 %}
 {% assign large_image = product.images[large_image_index] %}
+{% assign quantity_available = product.selected_or_first_available_variant.inventory_quantity %}
 
 <div itemscope itemtype="http://schema.org/Product">
   <div class="product-hero-background" style="background-image: url({{ background_image | img_url: 'master' }})">
@@ -114,6 +115,7 @@
                   <p id="ProductPrice" class="h2{% if product.compare_at_price > product.price %} on-sale{% endif %}" itemprop="price">
                     {{ product.price | money }}
                   </p>
+                  <p id="QuantityAvailable">({{quantity_available}} left)</p>
                   {% comment %}<label for="Quantity" class="quantity-selector">{{ 'products.product.quantity' | t }}</label>{% endcomment %}
                   <input type="number" id="Quantity" name="quantity" value="1" min="1" class="quantity-selector">
                 </div>
@@ -205,22 +207,22 @@
   <div class="wrapper">
     <div class="grid ingredients">
       <h1>The best things come in thin square packages.</h1>
-        <div class="ingredient grid__item large--one-half columns">
+        <div class="ingredient grid__item large--one-half small--one-whole columns">
           <img src="{{ featured_image | img_url: 'small' }}" />
           <h3>{{ product.metafields.product_contents.item_1 }}</h3>
           <p>{{ product.metafields.product_contents.item_1_description }}</p>
         </div>
-        <div class="ingredient grid__item large--one-half columns">
+        <div class="ingredient grid__item large--one-half small--one-whole columns">
           <img src="{{ product.metafields.product_contents.item_2_image }}" />
           <h3>{{ product.metafields.product_contents.item_2 }}</h3>
           <p>{{ product.metafields.product_contents.item_2_description }}</p>
         </div>
-        <div class="ingredient grid__item large--one-half columns">
+        <div class="ingredient grid__item large--one-half small--one-whole columns">
           <img src="{{ product.metafields.product_contents.item_3_image }}" />
           <h3>{{ product.metafields.product_contents.item_3 }}</h3>
           <p>{{ product.metafields.product_contents.item_3_description }}</p>
         </div>
-        <div class="ingredient grid__item large--one-half columns">
+        <div class="ingredient grid__item large--one-half small--one-whole columns">
           <img src="{{ product.metafields.product_contents.item_4_image }}" />
           <h3>{{ product.metafields.product_contents.item_4 }}</h3>
           <p>{{ product.metafields.product_contents.item_4_description }}</p>

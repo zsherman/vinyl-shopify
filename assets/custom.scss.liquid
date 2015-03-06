@@ -213,13 +213,18 @@ $proxima: 'Proxima-Nova', sans-serif;
       text-decoration: line-through;
     }
 
-    #ProductPrice, #ComparedPrice {
+    #ProductPrice, #ComparedPrice, #QuantityAvailable {
       display: inline-block;
       font-family: Adelle-Light;
       font-size: 22px;
       color: #FFFFFF;
       line-height: 32px;
       font-weight: 400;
+    }
+
+    #QuantityAvailable {
+      font-size: 16px;
+      padding-left: 2px;
     }
 
     .js-qty input {
@@ -461,22 +466,37 @@ $proxima: 'Proxima-Nova', sans-serif;
   }
 
   .syllabus-lessons li {
-    font-family: $lato;
+    font-family: "Lato",sans-serif;
     font-size: 14px;
     color: #324141;
     line-height: 27px;
     border-bottom: 1px solid #eee;
-    padding: 12px 0 12px 38px;
+    padding: 12px 0 12px 10px;
     position: relative;
 
     .play-button {
       position: absolute;
-      left: 0;
+      right: 0;
       font-size: 24px;
+    }
+
+    .play-button a {
+      color: #fff;
+      border: none;
+      background: none;
+      cursor: pointer;
     }
 
     .play-button i {
       color: #CACACA;
+    }
+
+    .play-button a i {
+      color: #203C6E;
+    }
+
+    .video-block {
+
     }
 
     span {
@@ -488,6 +508,13 @@ $proxima: 'Proxima-Nova', sans-serif;
       border-radius: 4px;
       font-size: 11px;
       cursor: pointer;
+      display: none;
+    }
+
+    &.available {
+      .play-button i{
+        color: #203C6E;
+      }
     }
   }
 
@@ -703,6 +730,15 @@ $proxima: 'Proxima-Nova', sans-serif;
   .view-deals-wrapper input {
     width: 100%;
     margin: 10px 0;
+  }
+
+  .template-product .about-this-box-image .vinyl-image {
+    height: 300px;
+    width: 300px;
+  }
+
+  .template-product .ingredients img {
+    float: none;
   }
 }
 
