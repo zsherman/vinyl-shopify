@@ -13,6 +13,8 @@
   {{ resource.metafields.namespace.key }}
 {% endcomment %}
 {% assign background_image = product.images.last %}
+{% assign large_image_index = product.images.length | minus:2 %}
+{% assign large_image = product.images[large_image_index] %}
 
 <div itemscope itemtype="http://schema.org/Product">
   <div class="product-hero-background" style="background-image: url({{ background_image | img_url: 'master' }})">
@@ -26,17 +28,18 @@
     {% endcomment %}
     {% if product.images.size > 1 %}
       <ul class="product-single__thumbnails grid-uniform" id="ProductThumbs">
-
         {% for image in product.images %}
           {% if image.position != forloop.length %}
-            <li class="grid__item one-quarter">
-              <a href="{{ image.src | img_url: 'large' }}" class="product-single__thumbnail">
-                <img src="{{ image.src | img_url: 'compact' }}" alt="{{ image.alt | escape }}">
-              </a>
-            </li>
+            {% assign second_to_last = forloop.length | minus:1 %}
+            {% if image.position != second_to_last %}
+              <li class="grid__item one-quarter">
+                <a href="{{ image.src | img_url: 'large' }}" class="product-single__thumbnail">
+                  <img src="{{ image.src | img_url: 'compact' }}" alt="{{ image.alt | escape }}">
+                </a>
+              </li>
+            {% endif %}
           {% endif %}
         {% endfor %}
-
       </ul>
     {% endif %}
 
@@ -154,7 +157,7 @@
         </p>
       </div>
       <div class="grid__item large--one-half about-this-box-image">
-        <div class="vinyl-image" background-image="{{ featured_image | img_url: 'large' }}">
+        <div class="vinyl-image" style="background-image: url({{ featured_image | img_url: 'large' }})">
           <div class="play-button-wrapper">
             <img src="{{ 'play-button.png' | asset_url }}" />
           </div>
@@ -164,7 +167,7 @@
   </div>
 
   <!-- Large Image -->
-  <div class="large-product-image" style="background-image: url('{{ product.metafields.large-image.image_url }}')">
+  <div class="large-product-image" style="background-image: url('{{ large_image | img_url: 'master' }}')">
     <div class="bottom-triangle"></div>
     <div class="product-quote-wrapper">
       <div class="product-quote">

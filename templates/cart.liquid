@@ -9,6 +9,7 @@
     - Shopify Payments - http://docs.shopify.com/manual/more/shopify-payments/testing-shopify-payments
 
 {% endcomment %}
+<div class="wrapper">
 {% if cart.item_count > 0 %}
 
   <form action="/cart" method="post" novalidate class="cart">
@@ -168,3 +169,4 @@
   <p>{{ 'cart.general.empty' | t }}</p>
   <p>{{ 'cart.general.continue_browsing_html' | t }}</p>
 {% endif %}
+</div>

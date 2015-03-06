@@ -87,6 +87,7 @@ $proxima: 'Proxima-Nova', sans-serif;
   font-weight: 600;
   letter-spacing: .05em;
   font-family: Raleway;
+  line-height: 1.7em;
   padding: 21px;
   color: #323232;
 }
@@ -107,10 +108,26 @@ $proxima: 'Proxima-Nova', sans-serif;
   padding: 0px;
 }
 
+.site-header__text-links {
+  color: #fff;
+}
+
 .site-header__text-links a {
-  padding: 20px;
+  padding: 21px;
   display: block;
   float: right;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.7em;
+  letter-spacing: .05em;
+  font-family: Raleway;
+  color: #323232;
+
+  &:hover {
+    color: #ccc;
+  }
 }
 
 .template-product {
@@ -304,7 +321,6 @@ $proxima: 'Proxima-Nova', sans-serif;
     .vinyl-image {
       height: 470px;
       width: 470px;
-      background: url('http://cdn.shopify.com/s/files/1/0570/2697/products/10f6ce8a62c3043ac72196a2bbb86ac265f39265_large.jpeg?v=1424561305');
       background-size: 100%;
       background-repeat: no-repeat;
       border-radius: 50%;
@@ -562,6 +578,10 @@ $proxima: 'Proxima-Nova', sans-serif;
     margin-top: 0;
   }
 
+  .featured-wrapper {
+    padding-top: 20px;
+  }
+
   .index-hero {
     min-height: 550px;
     text-align: center;
@@ -569,11 +589,11 @@ $proxima: 'Proxima-Nova', sans-serif;
     position: relative;
   }
 
-
   .hero-content {
     @include vertical-align;
     position: absolute;
     width: 100%;
+
 
     h4 {
       font-family: ProximaNova-Regular;
@@ -614,6 +634,43 @@ $proxima: 'Proxima-Nova', sans-serif;
       padding: 20px;
     }
 
+    .view-deals-wrapper {
+      width: 60%;
+      margin: 10px auto;
+
+      form {
+        margin: 0;
+      }
+    }
+
+    .view-deals-email {
+      display: inline-block;
+      background: transparent;
+      border: 2px solid #fff;
+      color: #fff;
+      padding: 19px;
+      width: 400px;
+      border-radius: 0;
+      margin-right: 10px;
+      margin: 5px 10px 5px 0;
+      outline: none;
+      vertical-align: top;
+      font-size: 20px;
+      font-weight: 300;
+    }
+
+    .view-deals-email.error {
+      border: 2px solid red;
+    }
+
+    .view-deals-email.valid {
+      border: 2px solid green;
+    }
+
+    .view-deals-email::-webkit-input-placeholder {
+      color: #fff;
+    }
+
     .view-deals {
       padding: 20px 30px;
       border: 2px solid #fff;
@@ -625,7 +682,11 @@ $proxima: 'Proxima-Nova', sans-serif;
       text-transform: uppercase;
       text-decoration: none;
       display: inline-block;
-      margin: 10px 0;
+      margin: 5px 0;
+      vertical-align: top;
+      background: none;
+      font-weight: 300;
+      border-radius: 0;
 
       &:hover {
         background: #fff;
@@ -638,7 +699,22 @@ $proxima: 'Proxima-Nova', sans-serif;
 
 }
 
+@media (max-width: 600px) {
+  .view-deals-wrapper input {
+    width: 100%;
+    margin: 10px 0;
+  }
+}
 
+@media (max-width: 905px) {
+  header .grid__item {
+    vertical-align: top !important;
+  }
+
+  .nav-logo {
+    padding-top: 8px !important;
+  }
+}
 
 @-webkit-keyframes rotate {
     from {-webkit-transform: rotate(0deg);}

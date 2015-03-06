@@ -13,12 +13,13 @@
     <div class="border"></div>
     <h1>{{settings.hero_middle_line}}</h1>
     <h3>{{settings.hero_bottom_line}}</h3>
-    <a href="#" class="view-deals
-    ">View Deals</a>
+    <div class="view-deals-wrapper">
+      {% include 'mailchimp' %}
+    </div>
   </div>
 </div>
 
-<div class="wrapper">
+<div class="wrapper featured-wrapper">
 
 <h2>{{ 'home_page.sections.frontpage_title' | t }}</h2>
 

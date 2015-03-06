@@ -1,5 +1,18 @@
 $(function() {
 
+    function mailchimpCallback (resp) {
+        if (resp.result === 'success') {
+            window.document.location = '/collections';
+        } else {
+          $('#mc-ebedded-subscribe-form input').css('border', '2px solid red');
+        }
+    }
+
+    $('#mc-embedded-subscribe-form').ajaxChimp({
+        url: 'http://vinylloop.us1.list-manage.com/subscribe/post?u=9634918a1dc1d44e6fc9e7cad&amp;id=fe7e4989f1',
+        callback: mailchimpCallback
+    });
+
     // Grab soundcloud widget
     var widget = SC.Widget(document.getElementById('soundcloud_widget'));
      widget.bind(SC.Widget.Events.READY, function() {
@@ -17,4 +30,6 @@ $(function() {
         $(this).addClass('vinyl-image-playing');
       }
     });
+
+
 });
