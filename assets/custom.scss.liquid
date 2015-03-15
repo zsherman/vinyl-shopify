@@ -12,6 +12,55 @@ $raleway: 'Raleway', sans-serif;
 $brandon: 'Brandon-Grotesque', sans-serif;
 $proxima: 'Proxima-Nova', sans-serif;
 
+@font-face {
+  font-family: 'ProximaNova-Light';
+  src: url('{{ "ProximaNova-Light.otf" | asset_url }}');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ProximaNova-Regular';
+  src: url('{{ "ProximaNova-Regular.otf" | asset_url }}');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ProximaNova-Semibold';
+  src: url('{{ "ProximaNova-Semibold.otf" | asset_url }}');
+  font-weight: normal;
+  font-style: normal;
+}
+
+{% comment %}@font-face {
+  font-family: 'ProximaNova-Bold';
+  src: url('{{ "ProximaNova-Bold.otf" | asset_url }}');
+  font-weight: normal;
+  font-style: normal;
+}{% endcomment %}
+
+@font-face {
+  font-family: 'BrandonGrotesque-Regular';
+  src: url('{{ "Brandon-Grotesque.ttf" | asset_url }}');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Adelle-Light';
+  src: url('{{ "Adelle-Light.otf" | asset_url }}');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Adelle-Regular';
+  src: url('{{ "Adelle-Regular.otf" | asset_url }}');
+  font-weight: normal;
+  font-style: normal;
+}
+
 @mixin vertical-align {
   position: relative;
   top: 50%;
@@ -58,6 +107,10 @@ $proxima: 'Proxima-Nova', sans-serif;
 
 .site-header {
   height: 63px;
+}
+
+input[value="paypal_express"] {
+  display: none;
 }
 
 .nav-bar {
@@ -134,6 +187,11 @@ $proxima: 'Proxima-Nova', sans-serif;
 
   .main-content {
     margin-top: 0;
+    padding-bottom: 0;
+  }
+
+  footer {
+    background: #fff;
   }
 
   .grid {
@@ -487,6 +545,10 @@ $proxima: 'Proxima-Nova', sans-serif;
       cursor: pointer;
     }
 
+    a {
+      text-decoration: none;
+    }
+
     .play-button i {
       color: #CACACA;
     }
@@ -526,7 +588,7 @@ $proxima: 'Proxima-Nova', sans-serif;
     height: 150px;
     width: 150px;
     float: left;
-    padding-right: 20px;
+    margin-right: 20px;
   }
 
   .ingredients h1 {
@@ -550,7 +612,7 @@ $proxima: 'Proxima-Nova', sans-serif;
   }
 
   .ingredient h3 {
-    font-family: ProximaNova-Semibold;
+    font-family: ProximaNova-Regular;
     font-size: 18px;
     color: #191919;
     line-height: 21px;
@@ -565,9 +627,18 @@ $proxima: 'Proxima-Nova', sans-serif;
   }
 
 
-  .soundcloud-widget {
+  #soundcloud-widget {
     visibility: hidden;
     height: 0px;
+  }
+
+  .wrapper.bread p {
+    position: relative;
+    top: 16px;
+
+    .breadcrumb {
+      margin-bottom: 15px;
+    }
   }
 
 
@@ -632,7 +703,7 @@ $proxima: 'Proxima-Nova', sans-serif;
     }
 
     h1 {
-      font-family: ProximaNova-Semibold;
+      font-family: ProximaNova-Regular;
       font-size: 76px;
       color: #FFFFFF;
       line-height: 89px;
@@ -722,8 +793,6 @@ $proxima: 'Proxima-Nova', sans-serif;
     }
   }
 
-
-
 }
 
 @media (max-width: 600px) {
@@ -741,6 +810,7 @@ $proxima: 'Proxima-Nova', sans-serif;
     float: none;
   }
 }
+
 
 @media (max-width: 905px) {
   header .grid__item {

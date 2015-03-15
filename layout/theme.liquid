@@ -39,6 +39,7 @@
 
   <!-- CSS ================================================== -->
   {{ 'timber.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'twitter.scss.css' | asset_url | stylesheet_tag }}
   {{ 'custom.scss.css' | asset_url | stylesheet_tag }}
 
   <!-- Header hook for plugins ================================================== -->
@@ -76,8 +77,10 @@
   {{ 'fastclick.min.js' | asset_url | script_tag }}
   {{ 'soundcloud.js' | asset_url | script_tag }}
   {{ 'mailchimp.js' | asset_url | script_tag }}
+  {{ 'twitter-fetcher.js' | asset_url | script_tag }}
   {{ 'timber.js' | asset_url | script_tag }}
   {{ 'custom.js' | asset_url | script_tag }}
+
 
   {% comment %}
     Template-specific js
@@ -124,6 +127,29 @@
       });
     </script>
   {% endif %}
-
+  <script>
+      (function(f,b){
+          var c;
+          f.hj=f.hj||function(){(f.hj.q=f.hj.q||[]).push(arguments)};
+          f._hjSettings={hjid:18855, hjsv:3};
+          c=b.createElement("script");c.async=1;
+          c.src="//static.hotjar.com/c/hotjar-18855.js?sv=3";
+          b.getElementsByTagName("head")[0].appendChild(c);
+      })(window,document);
+  </script>
+  <!-- KISSmetrics tracking snippet -->
+  <script type="text/javascript">var _kmq = _kmq || [];
+    var _kmk = _kmk || '2420cf084bb37ba042da269833edbcb12a9f3740';
+    function _kms(u){
+      setTimeout(function(){
+        var d = document, f = d.getElementsByTagName('script')[0],
+        s = d.createElement('script');
+        s.type = 'text/javascript'; s.async = true; s.src = u;
+        f.parentNode.insertBefore(s, f);
+      }, 1);
+    }
+    _kms('//i.kissmetrics.com/i.js');
+    _kms('//doug1izaerwt3.cloudfront.net/' + _kmk + '.1.js');
+  </script>
 </body>
 </html>
