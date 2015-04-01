@@ -81,12 +81,10 @@
   {% for collection in collections limit:6 %}
     {% unless index > 5 %}
 
-      {% unless collection.handle == 'frontpage' %}
         {% assign isEmpty = false %}
         {% assign collection_item_width = 'large--one-fifth medium--one-third' %}
         {% include 'collection-grid-item' %}
         {% assign index = index | plus: 1 %}
-      {% endunless %}
 
     {% endunless %}
   {% endfor %}

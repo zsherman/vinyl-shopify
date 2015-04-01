@@ -554,7 +554,7 @@ input[value="paypal_express"] {
     }
 
     .play-button a i {
-      color: #203C6E;
+      color: #000;
     }
 
     .video-block {
@@ -632,9 +632,13 @@ input[value="paypal_express"] {
     height: 0px;
   }
 
-  .wrapper.bread p {
-    position: relative;
-    top: 16px;
+  .wrapper.bread {
+
+    p {
+      position: relative;
+      top: 36px;
+      margin: 0;
+    }
 
     .breadcrumb {
       margin-bottom: 15px;
@@ -819,6 +823,71 @@ input[value="paypal_express"] {
 
   .nav-logo {
     padding-top: 8px !important;
+  }
+}
+
+@media (max-width: 450px) {
+  .grid__item.right-nav {
+    position: absolute;
+    width: 150px;
+    height: 63px;
+    right: 0;
+  }
+
+  .nav-logo {
+    position: absolute;
+    left: 0;
+    width: 60px;
+  }
+
+  a[href="/pages/about-us"] {
+    display: none;
+  }
+
+  .template-product .product-single {
+    padding: 20px;
+
+    .grid__item {
+      padding: 0;
+    }
+  }
+
+  .product-single__thumbnails {
+    display: none;
+  }
+
+  .about-this-box-image {
+    padding: 0;
+  }
+
+  .template-product .about-this-box-image .vinyl-image {
+    width: 250px;
+    height: 250px;
+  }
+
+  .template-product .large-product-image .product-quote {
+    width: auto;
+  }
+
+  .template-product .ingredients h1 {
+    width: auto;
+  }
+
+  .template-product .ingredient {
+    text-align: center;
+    padding: 20px 0;
+  }
+
+  .grid {
+    padding: 0;
+  }
+
+  .template-product .about-this-box, .template-product .syllabus {
+    padding: 0;
+  }
+
+  .zig-zag {
+    margin-top: 25px;
   }
 }
 

@@ -3,7 +3,7 @@ $(function() {
     function mailchimpCallback (resp) {
         if (resp.result === 'success') {
             ga('send', 'event', 'email', 'submit', 'success');
-            window.document.location = '/collections';
+            window.document.location = '/collections/frontpage';
         } else {
           $('#mc-ebedded-subscribe-form input').css('border', '2px solid red');
           ga('send', 'event', 'email', 'submit', 'invalid');
